@@ -14,8 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Frontend
-require_once __DIR__.'/frontend/web.php';
+// // Frontend
+// require_once __DIR__.'/frontend/web.php';
 
 // Auth
 require_once __DIR__.'/backend/auth.php';

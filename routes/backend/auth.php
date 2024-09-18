@@ -6,11 +6,11 @@ use App\Http\Controllers\Backend\Auth\AuthController;
 
 
 
-Route::get('/login', function () {
+Route::get('/', function () {
     if (Auth::check()) {
         return redirect()->route('backend.dashboard');
     }
-    return view('frontend.auth.pages.login');
+    return view('backend.auth.pages.login');
 })->name('login');
 
 

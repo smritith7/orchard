@@ -33,7 +33,7 @@
 
           {{-- User --}}
           <li class="nav-item">
-            <a href="{{route('backend.users.index')}}" class="nav-link">
+            <a href="" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Users
@@ -61,56 +61,6 @@
             </a>
           </li>
 
-          {{-- Add User --}}
-          <li class="nav-item">
-            <a href="" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-             Add User
-              </p>
-            </a>
-          </li>
-
-          {{-- Reports --}}
-          <li class="nav-item">
-            <a href="" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-              Reports
-              </p>
-            </a>
-          </li>
-
-          {{--Alerts --}}
-          <li class="nav-item">
-            <a href="" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-              Alerts
-              </p>
-            </a>
-          </li>
-
-
-          {{--  --}}
-          <li class="nav-item">
-            <a href="{{route('backend.reservations.index')}}" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-                Reservation
-              </p>
-            </a>
-          </li>
-
-          {{-- Chefs --}}
-          <li class="nav-item">
-            <a href="{{route('backend.chefs.index')}}" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-                Chefs
-              </p>
-            </a>
-          </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
