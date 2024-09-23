@@ -1,153 +1,79 @@
 @extends('backend.layouts.main')
 
-@section('breadcrumb')
-    <div class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1 class="m-0">Dashboard</h1>
-                </div><!-- /.col -->
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                        <li class="breadcrumb-item active">Users</li>
-                        <li class="breadcrumb-item active">Create</li>
-                    </ol>
-                </div><!-- /.col -->
-            </div><!-- /.row -->
-        </div><!-- /.container-fluid -->
-    </div>
-@endsection
-
-
 @section('content')
-    <div class="row justify-content-center mt-5">
-        <div class="col-md-8">
+<div class=" container mt-5">
+    <h2>Create New User</h2>
 
+    @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
 
-            <form action="{{ route('backend.user.store') }}" method="post">
-                @csrf
+    <form action="{{ route('backend.user.store') }}" method="POST">
+        @csrf
 
-                <div class="mb-3 row">
-                    <label for="email" class="col-md-4 col-form-label text-md-end text-start">email</label>
-                    <div class="col-md-6">
-                        <input type="text" class="form-control @error('email') is-invalid @enderror" id="email"
-                            name="email" value="{{ old('email') }}" required>
-                        @if ($errors->has('email'))
-                            <span class="text-danger">{{ $errors->first('email') }}</span>
-                        @endif
-                    </div>
-                </div>
-
-                <div class="mb-3 row">
-                    <label for="password" class="col-md-4 col-form-label text-md-end text-start">password</label>
-                    <div class="col-md-6">
-                        <input type="text" class="form-control @error('password') is-invalid @enderror" id="password"
-                            name="password" value="{{ old('password') }}" required>
-                        @if ($errors->has('password'))
-                            <span class="text-danger">{{ $errors->first('password') }}</span>
-                        @endif
-                    </div>
-                </div>
-                <div class="mb-3 row">
-                    <label for="firstname" class="col-md-4 col-form-label text-md-end text-start">FirstName</label>
-                    <div class="col-md-6">
-                        <input type="text" class="form-control @error('firstname') is-invalid @enderror" id="firstname"
-                            name="firstname" value="{{ old('firstname') }}" required>
-                        @if ($errors->has('firstname'))
-                            <span class="text-danger">{{ $errors->first('firstname') }}</span>
-                        @endif
-                    </div>
-                </div>
-
-                <div class="mb-3 row">
-                    <label for="lastname" class="col-md-4 col-form-label text-md-end text-start">LastName</label>
-                    <div class="col-md-6">
-                        <input type="text" class="form-control @error('lastname') is-invalid @enderror" id="lastname"
-                            name="lastname" value="{{ old('lastname') }}" required>
-                        @if ($errors->has('lastname'))
-                            <span class="text-danger">{{ $errors->first('lastname') }}</span>
-                        @endif
-                    </div>
-                </div>
-
-                <div class="mb-3 row">
-                    <label for="Gender" class="col-md-4 col-form-label text-md-end text-start">Gender</label>
-                    <div class="col-md-6">
-                        <select class="form-select form-select-lg form-control" name="Gender">
-                            <option selected>Select Gender</option>
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
-
-                        </select>
-                    </div>
-                </div>
-
-
-                <div class="mb-3 row">
-                    <label for="phone_no" class="col-md-4 col-form-label text-md-end text-start">Phone_no
-                    </label>
-                    <div class="col-md-6">
-                        <input type="phone_no" class="form-control @error('phone_no') is-invalid @enderror" id="phone_no"
-                            name="phone_no" value="{{ old('phone_no') }}" required>
-                        @if ($errors->has('phone_no'))
-                            <span class="text-danger">{{ $errors->first('phone_no') }}</span>
-                        @endif
-                    </div>
-                </div>
-
-                <div class="mb-3 row">
-                    <label for="address" class="col-md-4 col-form-label text-md-end text-start">Address</label>
-                    <div class="col-md-6">
-                        <input type="address" class="form-control @error('address') is-invalid @enderror" id="address"
-                            name="address" required>
-                        @if ($errors->has('address'))
-                            <span class="text-danger">{{ $errors->first('address') }}</span>
-                        @endif
-                    </div>
-                </div>
-
-
-                <div class="mb-3 row">
-                    <label for="role" class="col-md-4 col-form-label text-md-end text-start">Role</label>
-                    <div class="col-md-6">
-                        <select class="form-select form-select-lg form-control" name="role_id">
-                            @foreach ($roles as $role)
-                                <option value="{{ $role->id }}">{{ $role->name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
-
-
-
-                <div class="mb-3 row">
-                    <label for="Nationality" class="col-md-4 col-form-label text-md-end text-start">Nationality</label>
-                    <div class="col-md-6">
-                        <select class="form-select form-select-lg form-control" name="Nationality">
-                            <option selected>Select one</option>
-                            <option value="nepali">Nepali</option>
-
-
-
-
-                        </select>
-                    </div>
-                </div>
-
-
-
-
-
-
-
-
-                <div class="mb-3 row">
-                    <input type="submit" class="col-md-3 offset-md-5 btn btn-primary" value="Register">
-                </div>
-
-            </form>
+        <div class="form-group mb-3">
+            <label for="full_name">Full Name:</label>
+            <input type="text" name="full_name" id="full_name" class="form-control @error('full_name') is-invalid @enderror"
+                value="{{ old('full_name') }}" required>
+            @error('full_name')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
         </div>
 
-    </div>
+        <div class="form-group mb-3">
+            <label for="phone_no">Phone No:</label>
+            <input type="tel" name="phone_no" id="phone_no" class="form-control @error('phone_no') is-invalid @enderror"
+                value="{{ old('phone_no') }}" required>
+            @error('phone_no')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="email">Email:</label>
+            <input type="email" name="email" id="email" class="form-control @error('email') is-invalid @enderror"
+                value="{{ old('email') }}" required>
+            @error('email')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+        </div>
+
+
+        <div class="form-group mb-3">
+            <label for="role">Role:</label>
+            <select name="role" id="role" class="form-select @error('role') is-invalid @enderror" required>
+                <option value="" selected>Select Role</option>
+                <option value="assistant">Admin</option>
+                <option value="manager">Manager</option>
+                <option value="assistant">Assistant</option>
+            </select>
+            @error('role')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password" class="form-control @error('email') is-invalid @enderror"
+                value="{{ old('password') }}" required>
+            @error('password')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="password">Conform Password</label>
+            <input type="password" name="password" id="password" class="form-control @error('password') is-invalid @enderror"
+                value="{{ old('password') }}" required>
+            @error('password')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+        </div>
+
+
+        <button type="submit" class="btn btn-primary">Register</button>
+    </form>
+</div>
 @endsection

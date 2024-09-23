@@ -9,7 +9,6 @@
     <div class="sidebar">
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-
         <div class="info">
           <a href="#" class="d-block">Alexander Pierce</a>
         </div>
@@ -31,20 +30,10 @@
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
-          {{-- User --}}
-          <li class="nav-item">
-            <a href="" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-                Users
-              </p>
-            </a>
-          </li>
-
           {{-- Product --}}
           <li class="nav-item">
             <a href="{{route('backend.products.index')}}" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
+              <i class="nav-icon fa-solid fa-cart-plus"></i>
               <p>
                Add Products
               </p>
@@ -54,16 +43,71 @@
           {{-- Sales --}}
           <li class="nav-item">
             <a href="" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
+              <i class="nav-icon fas fa-search-dollar"></i>
               <p>
               Sales
               </p>
             </a>
           </li>
 
+           {{-- User --}}
+           <li class="nav-item">
+            <a href="{{route('backend.user.index')}}" class="nav-link">
+              <i class="nav-icon fas fa-user-friends"></i>
+              <p>
+                Users
+              </p>
+            </a>
+          </li>
+
+           {{-- Report --}}
+           <li class="nav-item">
+            <a href="{{route('backend.user.index')}}" class="nav-link">
+              <i class="nav-icon fa-solid fa-table-cells"></i>
+              <p>
+                Report
+              </p>
+            </a>
+          </li>
+
+           {{-- Settings --}}
+           <li class="nav-item">
+            <a href="#settingsDropdown" class="nav-link" data-toggle="collapse" aria-expanded="false" aria-controls="settingsDropdown">
+              <i class="nav-icon fa-solid fa-gear"></i>
+              <p>
+                Settings
+              </p>
+            </a>
+            <div id="settingsDropdown" class="collapse">
+              <a href="" class="dropdown-item">Role Management</a>
+              <a href="" class="dropdown-item">Unit Management</a>
+            </div>
+          </li>
+
+           {{-- Alert --}}
+           <li class="nav-item">
+            <a href="{{route('backend.user.index')}}" class="nav-link">
+              <i class="nav-icon fa-solid fa-bell"></i>
+              <p>
+                Alerts
+              </p>
+            </a>
+          </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
     </div>
     <!-- /.sidebar -->
-  </aside>
+</aside>
+
+<style>
+    /* Hover effect */
+    .nav-item a:hover {
+      background-color: #50646b;
+      color: #fff;
+    }
+    .dropdown-hover:hover {
+      background-color: #343a40;
+      color: white;
+    }
+  </style>
