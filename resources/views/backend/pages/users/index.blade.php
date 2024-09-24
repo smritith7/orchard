@@ -10,17 +10,16 @@
 
         <div class="card shadow mt-4">
             <div class="card-body">
-                <!-- Users List Title with Button and Search Form -->
                 <div class="row align-items-center mb-3">
-                    <!-- Title and Create User Button in the left column -->
+                    <!-- Title and Create User -->
                     <div class="col-md-6 d-flex align-items-center">
                         <h5 class="m-0" style="font-weight: 500; font-size: 1.5rem; color: #343a40;">Users List</h5>
                         <button class="btn btn-primary ml-3 btn-shadow" data-toggle="modal" data-target="#registrationModal">
-                            Create User +
+                            Create User
                         </button>
                     </div>
 
-                    <!-- Search Form in the right column -->
+                    <!-- Search Form -->
                     <div class="col-md-6 d-flex justify-content-end">
                         <form method="GET" action="{{ route('backend.user.index') }}" class="d-flex me-2">
                             <div class="input-group">
@@ -29,7 +28,7 @@
                                        class="form-control" placeholder="Search"
                                        style="width: 200px; border-top-right-radius: 0; border-bottom-right-radius: 0;">
 
-                                <!-- Search Button with Shadow and Blue Hover -->
+                                <!-- Search Button -->
                                 <button id="search-button" type="submit" class="btn btn-outline-secondary btn-shadow search-btn"
                                         style="border: 1px solid #ced4da; background-color: transparent; height: 38px; border-top-left-radius: 0; border-bottom-left-radius: 0;">
                                     <i class="fas fa-search"></i>
@@ -46,7 +45,7 @@
                             <!-- Modal Header -->
                             <div class="modal-header justify-content-center bg-secondary text-dark">
                                 <h4 class="modal-title font-weight-bold">Register New Users</h4>
-                                <button type="button" class="close" data-dismiss="modal">×</button>
+                                <button type="button" class="close" data-dismiss="modal" style="color: white;">×</button>
                             </div>
 
                             <!-- Modal Body -->
@@ -122,13 +121,12 @@
                                     </div>
                                 </form>
                             </div>
-
                         </div>
                     </div>
                 </div>
 
                 <!-- User Table -->
-                <table class="table table-striped">
+                <table class="table table-hover">
                     <thead>
                         <tr>
                             <th>S.N</th>
@@ -142,7 +140,7 @@
                     <tbody>
                         @forelse ($users as $index => $user)
                             <tr>
-                                <td>{{ $index + 1 }}</td>
+                                <td>{{ $users->firstItem() + $index }}</td>
                                 <td>{{ $user->full_name }}</td>
                                 <td>{{ $user->email }}</td>
                                 <td>{{ $user->phone_no }}</td>
@@ -178,17 +176,16 @@
 
     <!-- Custom Styles for Button Shadows and Hover Effects -->
     <style>
-        /* Apply shadow to all buttons with .btn-shadow class */
+
         .btn-shadow {
             box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.2s ease; /* Smooth transition */
         }
 
-        /* Optional: Slightly darker shadow on hover */
         .btn-shadow:hover {
             box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.15);
         }
 
-        /* Force the hover background to blue for search button */
         .search-btn:hover {
             background-color: #007bff !important;
             color: white !important;

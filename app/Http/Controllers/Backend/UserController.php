@@ -64,7 +64,7 @@ class UserController extends Controller
         $validatedData = $request->validate([
             'full_name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email,' . $id,
-            'phone_no' => 'required|string|max:15',
+            'phone_no' => 'required|string|max:20',
             'role' => 'required|string',
             'password' => 'nullable|string|min:8', // Make password optional
         ]);
@@ -93,5 +93,6 @@ class UserController extends Controller
         $user->delete();
         return redirect()->route('backend.user.index')->with('success', 'User deleted successfully.');
     }
+
 }
 
