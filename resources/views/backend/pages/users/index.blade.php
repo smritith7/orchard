@@ -15,8 +15,8 @@
                     <!-- Title and Create User Button in the left column -->
                     <div class="col-md-6 d-flex align-items-center">
                         <h5 class="m-0" style="font-weight: 500; font-size: 1.5rem; color: #343a40;">Users List</h5>
-                        <button class="btn btn-primary ml-3" data-toggle="modal" data-target="#registrationModal">
-                            Create User
+                        <button class="btn btn-primary ml-3 btn-shadow" data-toggle="modal" data-target="#registrationModal">
+                            Create User +
                         </button>
                     </div>
 
@@ -29,8 +29,8 @@
                                        class="form-control" placeholder="Search"
                                        style="width: 200px; border-top-right-radius: 0; border-bottom-right-radius: 0;">
 
-                                <!-- Search Button with Secondary Style and Blue Hover -->
-                                <button id="search-button" type="submit" class="btn btn-outline-secondary search-btn"
+                                <!-- Search Button with Shadow and Blue Hover -->
+                                <button id="search-button" type="submit" class="btn btn-outline-secondary btn-shadow search-btn"
                                         style="border: 1px solid #ced4da; background-color: transparent; height: 38px; border-top-left-radius: 0; border-bottom-left-radius: 0;">
                                     <i class="fas fa-search"></i>
                                 </button>
@@ -43,7 +43,6 @@
                 <div class="modal fade" id="registrationModal">
                     <div class="modal-dialog">
                         <div class="modal-content">
-
                             <!-- Modal Header -->
                             <div class="modal-header justify-content-center bg-secondary text-dark">
                                 <h4 class="modal-title font-weight-bold">Register New Users</h4>
@@ -118,7 +117,7 @@
                                     </div>
 
                                     <div class="text-center">
-                                        <button type="submit" class="btn btn-danger"
+                                        <button type="submit" class="btn btn-danger btn-shadow"
                                             style="width: 150px;">Register</button>
                                     </div>
                                 </form>
@@ -150,13 +149,13 @@
                                 <td>{{ ucfirst($user->role) }}</td>
                                 <td>
                                     <a href="{{ route('backend.user.show', $user->id) }}"
-                                        class="btn btn-success btn-sm">View</a>
-                                    <a href="{{ route('backend.user.edit', $user->id) }}" class="btn btn-info btn-sm">Edit</a>
+                                        class="btn btn-success btn-sm btn-shadow">View</a>
+                                    <a href="{{ route('backend.user.edit', $user->id) }}" class="btn btn-info btn-sm btn-shadow">Edit</a>
                                     <form action="{{ route('backend.user.destroy', $user->id) }}" method="POST"
                                         style="display:inline-block;">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm"
+                                        <button type="submit" class="btn btn-danger btn-sm btn-shadow"
                                             onclick="return confirm('Are you sure?')">Delete</button>
                                     </form>
                                 </td>
@@ -177,12 +176,23 @@
         </div>
     </div>
 
-    <!-- Custom Styles for Hover Effect -->
+    <!-- Custom Styles for Button Shadows and Hover Effects -->
     <style>
+        /* Apply shadow to all buttons with .btn-shadow class */
+        .btn-shadow {
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Optional: Slightly darker shadow on hover */
+        .btn-shadow:hover {
+            box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Force the hover background to blue for search button */
         .search-btn:hover {
-            background-color: #007bff !important; /* Bootstrap primary blue color */
-            border-color: #007bff !important; /* Match the border color with the hover */
-            color: #fff !important; /* Change the icon color to white on hover */
+            background-color: #007bff !important;
+            color: white !important;
+            border-color: #007bff !important;
         }
     </style>
 @endsection
