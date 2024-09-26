@@ -1,4 +1,4 @@
-@extends('backend.layouts.main')
+{{-- @extends('backend.layouts.main')
 
 @section('content')
 <div class=" container mt-5">
@@ -76,4 +76,4 @@
         <button type="submit" class="btn btn-primary">Register</button>
     </form>
 </div>
-@endsection
+@endsection --}}

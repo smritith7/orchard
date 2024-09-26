@@ -9,6 +9,8 @@
             </div>
         @endif
 
+        {{-- user-detail --}}
+
         <div class="card shadow mb-4">
             <div class="card-header">
                 <h2 class="m-0">User Detail</h2>
@@ -22,20 +24,23 @@
                         <p class="card-text"><strong>Role:</strong> {{ ucfirst($user->role) ?? 'N/A' }}</p>
                     </div>
                     <div class="col-md-6 text-md-right mb-3">
-                        <img src="{{ asset($user->avatar ? 'storage/' . $user->avatar : 'images/avatar.jpeg') }}" alt="User Avatar" class="img-fluid rounded-circle" style="width: 150px; height: 150px;">
-
+                        <img src="{{ asset('path/to/user-avatar.png') }}" alt="User Avatar" class="img-fluid rounded-circle" style="width: 150px; height: 150px;">
+                    </div>
                 </div>
             </div>
-            <div class="card-footer text-end">
-                <a href="{{ route('backend.user.edit', ['id' => $user->id]) }}" class="btn btn-info shadow">Edit User</a>
 
-                <form action="{{ route('backend.user.destroy', ['id' => $user->id]) }}" method="POST" style="display: inline-block;">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-danger shadow ms-4"
-                        onclick="return confirm('Are you sure you want to delete this user?')">Delete User</button>
-                </form>
-            </div>
+        </div>
+        <div class=" text-end">
+            <a href="{{ route('backend.user.edit', ['id' => $user->id]) }}" class="btn btn-info shadow">Edit User</a>
+
+            <form action="{{ route('backend.user.destroy', ['id' => $user->id]) }}" method="POST" style="display: inline-block;">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="btn btn-danger shadow ms-2"
+                    onclick="return confirm('Are you sure you want to delete this user?')">Delete User</button>
+            </form>
         </div>
     </div>
+
+
 @endsection

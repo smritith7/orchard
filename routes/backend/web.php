@@ -26,8 +26,12 @@ Route::middleware(['auth'])->as('backend.')->group(function () {
     Route::get('/products/{id}', [ProductController::class, 'show'])->name('products.show');
     Route::delete('/products/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
 
-    // Setting Routes
-    Route::get('/roles/user-role',[RoleController::class, 'index'])->name('roles.user-role');
-
+    // Roles Routes
+    Route::get('/roles/user-role', [RoleController::class, 'index'])->name('roles.user-role');
+    Route::post('/roles/store', [RoleController::class, 'store'])->name('roles.store');
+    Route::get('/roles/{id}', [RoleController::class, 'show'])->name('roles.show');
+    Route::get('/roles/{id}/edit', [RoleController::class, 'edit'])->name('roles.edit');
+    Route::put('/roles/{id}', [RoleController::class, 'update'])->name('roles.update');
+    Route::delete('/roles/{id}', [RoleController::class, 'destroy'])->name('roles.destroy');
 
 });

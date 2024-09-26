@@ -28,7 +28,6 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    // Optionally, add an accessor for role
     public function getRoleAttribute($value)
     {
         return ucfirst($value); // Capitalizes the role name

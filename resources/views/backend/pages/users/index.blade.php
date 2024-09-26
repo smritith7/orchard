@@ -24,13 +24,14 @@
                         <form method="GET" action="{{ route('backend.user.index') }}" class="d-flex me-2">
                             <div class="input-group">
                                 <!-- Search Input Field -->
-                                <input id="search-input" type="search" name="search" value="{{ request()->get('search') }}"
-                                       class="form-control" placeholder="Search"
-                                       style="width: 200px; border-top-right-radius: 0; border-bottom-right-radius: 0;">
+                                <input id="search-input" type="search" name="search"
+                                    value="{{ request()->get('search') }}" class="form-control" placeholder="Search"
+                                    style="width: 200px; border-top-right-radius: 0; border-bottom-right-radius: 0;">
 
                                 <!-- Search Button -->
-                                <button id="search-button" type="submit" class="btn btn-outline-secondary btn-shadow search-btn"
-                                        style="border: 1px solid #ced4da; background-color: transparent; height: 38px; border-top-left-radius: 0; border-bottom-left-radius: 0;">
+                                <button id="search-button" type="submit"
+                                    class="btn btn-outline-secondary btn-shadow search-btn"
+                                    style="border: 1px solid #ced4da; background-color: transparent; height: 38px; border-top-left-radius: 0; border-bottom-left-radius: 0;">
                                     <i class="fas fa-search"></i>
                                 </button>
                             </div>
@@ -120,7 +121,9 @@
                                             style="width: 150px;">Register</button>
                                     </div>
                                 </form>
+
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -148,7 +151,8 @@
                                 <td>
                                     <a href="{{ route('backend.user.show', $user->id) }}"
                                         class="btn btn-success btn-sm btn-shadow">View</a>
-                                    <a href="{{ route('backend.user.edit', $user->id) }}" class="btn btn-info btn-sm btn-shadow">Edit</a>
+                                    <a href="{{ route('backend.user.edit', $user->id) }}"
+                                        class="btn btn-info btn-sm btn-shadow">Edit</a>
                                     <form action="{{ route('backend.user.destroy', $user->id) }}" method="POST"
                                         style="display:inline-block;">
                                         @csrf
@@ -176,10 +180,10 @@
 
     <!-- Custom Styles for Button Shadows and Hover Effects -->
     <style>
-
         .btn-shadow {
             box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-            transition: box-shadow 0.2s ease; /* Smooth transition */
+            transition: box-shadow 0.2s ease;
+            /* Smooth transition */
         }
 
         .btn-shadow:hover {

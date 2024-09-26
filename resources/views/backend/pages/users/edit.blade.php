@@ -16,7 +16,7 @@
                 <form method="POST" action="{{ route('backend.user.update', ['id' => $user->id]) }}">
                     @csrf
                     @method('PUT')
-
+                    {{-- Edit user Form --}}
                     <div class="form-row">
                         <div class="col-md-6 mb-3">
                             <label for="full_name">Full Name:</label>
