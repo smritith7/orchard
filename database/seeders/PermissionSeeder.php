@@ -13,10 +13,10 @@ class PermissionSeeder extends Seeder
     public function run(): void
     {
         $permissions = [
-            ['title' => 'create-posts'],
-            ['title' => 'edit-posts'],
-            ['title' => 'delete-posts'],
-            ['title' => 'view-posts'],
+            ['name' => 'create-posts'],
+            ['name' => 'edit-posts'],
+            ['name' => 'delete-posts'],
+            ['name' => 'view-posts'],
         ];
 
         foreach ($permissions as $permission) {

@@ -49,7 +49,7 @@
                         @enderror
                     </div>
 
-                    <div class="mb-3">
+                    {{-- <div class="mb-3">
                         <label for="role">Role:</label>
                         <select name="role" id="role" class="form-select @error('role') is-invalid @enderror" required>
                             <option value="admin" {{ $user->role == 'admin' ? 'selected' : '' }}>Admin</option>
@@ -59,19 +59,22 @@
                         @error('role')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
-                    </div>
+                    </div> --}}
 
-                    <div class="mb-3">
+                    <div class="form-group mb-4">
                         <label for="password">Password:</label>
                         <input type="password" name="password" id="password" class="form-control"
                             placeholder="Leave blank to keep the current password">
                     </div>
-
                     <div class="text-end">
-                        <button type="submit" class="btn btn-primary shadow">Update User</button>
+                        <button type="submit" class="btn btn-primary shadow" style="float: right;">Update</button>
                     </div>
+
                 </form>
+
             </div>
+
+
         </div>
     </div>
 @endsection

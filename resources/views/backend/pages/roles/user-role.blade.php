@@ -8,37 +8,29 @@
             </div>
         @endif
 
-        <div class="card shadow mt-4">
-            <div class="card-body">
-                <div class="row align-items-center mb-3">
-                    <div class="col-md-6 d-flex align-items-center">
-                        <h5 class="m-0" style="font-weight: 500; font-size: 1.5rem; color: #343a40;">Create Role</h5>
+        <div class="container mt-5">
+            <div class="container mt-3">
+                <div class="row align-items-center">
+                    <div class="col d-flex justify-content-between">
+                        <h3 class="mb-0 text-primary">
+                            Roles and Permissions Table
+                        </h3>
                         <button class="btn btn-primary ml-3 btn-shadow" data-toggle="modal" data-target="#CreateroleModal">
                             Create Role
                         </button>
                     </div>
-                    <div class="col-md-6 d-flex justify-content-end">
-                        <form method="GET" action="{{ route('backend.roles.user-role') }}" class="d-flex me-2">
-                            <div class="input-group">
-                                <input id="search-input" type="search" name="search"
-                                    value="{{ request()->get('search') }}" class="form-control" placeholder="Search"
-                                    style="width: 200px; border-top-right-radius: 0; border-bottom-right-radius: 0;">
-                                <button id="search-button" type="submit"
-                                    class="btn btn-outline-secondary btn-shadow search-btn"
-                                    style="border: 1px solid #ced4da; background-color: transparent; height: 38px; border-top-left-radius: 0; border-bottom-left-radius: 0;">
-                                    <i class="fas fa-search"></i>
-                                </button>
-                            </div>
-                        </form>
-                    </div>
                 </div>
+            </div>
+
+        <div class="card shadow mt-4">
+            <div class="card-body">
 
                 <!-- Create Role Modal -->
                 <div class="modal fade" id="CreateroleModal">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header justify-content-center bg-secondary text-dark">
-                                <h4 class="modal-title font-weight-bold">Create User Role</h4>
+                                <h4 class="modal-name font-weight-bold">Create User Role</h4>
                                 <button type="button" class="close" data-dismiss="modal" style="color: white;">×</button>
                             </div>
                             <div class="modal-body">
@@ -46,8 +38,8 @@
                                 <form action="{{ route('backend.roles.store') }}" method="POST">
                                     @csrf
                                     <div class="form-group">
-                                        <label for="roleName">Title</label>
-                                        <input type="text" class="form-control" id="roleName" name="title" required> <!-- Changed name to "title" -->
+                                        <label for="roleName">Name</label>
+                                        <input type="text" class="form-control" id="roleName" name="name" required>
                                     </div>
                                     <div class="row align-items-center">
                                         <div class="col d-flex align-items-center">
@@ -100,7 +92,7 @@
                                         </div>
 
                                         <!-- Right Column -->
-                                        <div class="col-md-6 pl-4">
+                                        <div class="col-md-6 pl-4 mb-2">
                                             <div class="form-check">
                                                 <input type="checkbox" class="form-check-input permission-checkbox"
                                                     id="manage_finance" name="permissions[]" value="manage_finance">
@@ -109,11 +101,11 @@
                                             </div>
                                             <div class="form-check">
                                                 <input type="checkbox" class="form-check-input permission-checkbox"
-                                                    id="manage_customer_feedback/reviews" name="permissions[]"
-                                                    value="manage_customer_feedback/reviews">
+                                                    id="manage_customer_feedback" name="permissions[]"
+                                                    value="manage_customer_feedback">
                                                 <label class="form-check-label"
-                                                    for="manage_customer_feedback/reviews">Manage Customer
-                                                    Feedback/Reviews</label>
+                                                    for="manage_customer_feedback">Manage Customer
+                                                    Feedback</label>
                                             </div>
                                             <div class="form-check">
                                                 <input type="checkbox" class="form-check-input permission-checkbox"
@@ -152,11 +144,11 @@
                 </div>
 
                 <!-- Roles Table -->
-                <table class="table table-bordered">
+                <table class="table table-hover">
                     <thead>
                         <tr>
                             <th style= "width: 20%";>S.N</th>
-                            <th style= "width: 50%";>Title</th>
+                            <th style= "width: 50%";>Name</th>
                             <th style= "width: 30%";>Action</th>
                         </tr>
                     </thead>
@@ -164,7 +156,7 @@
                         @foreach ($roles as $index => $role)
                             <tr>
                                 <td>{{ $roles->firstItem() + $index }}</td>
-                                <td>{{ $role->title }}</td>
+                                <td>{{ $role->name }}</td>
                                 <td>
                                     <a href="{{route('backend.roles.show', $role->id) }}" class="btn btn-success btn-sm btn-shadow">View</a>
                                     <a href="{{route('backend.roles.edit', $role->id) }}" class="btn btn-info btn-sm btn-shadow">Edit</a>
@@ -180,6 +172,8 @@
                         @endforeach
                     </tbody>
                 </table>
+
+                {{--Pagination--}}
                 <div class="mt-3 d-flex justify-content-center">
                     {{ $roles->links('Backend.pagination.page-pagination') }}
                 </div>
@@ -188,7 +182,7 @@
     </div>
 
     <!-- Custom Styles for Button Shadows and Hover Effects -->
-    <style>
+    {{-- <style>
         .btn-shadow {
             box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
             transition: box-shadow 0.2s ease;
@@ -203,7 +197,7 @@
             color: white !important;
             border-color: #007bff !important;
         }
-    </style>
+    </style> --}}
 
     <!-- Script for Select All Checkbox -->
     <script>

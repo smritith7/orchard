@@ -13,8 +13,8 @@ class RoleController extends Controller
         $search = $request->get('search');
 
         $roles = Role::when($search, function ($query, $search) {
-            return $query->where('title', 'like', "%{$search}%");
-        })->paginate(10); // Adjust the number for page
+            return $query->where('name', 'like', "%{$search}%");
+        })->paginate(10);
 
         return view('backend.pages.roles.user-role', compact('roles', 'search'));
     }
@@ -23,18 +23,16 @@ class RoleController extends Controller
     {
         // Validate the request
         $request->validate([
-            'title' => 'required|string|max:255',
+            'name' => 'required|string|max:255',
             'permissions' => 'array',
             'permissions.*' => 'string',
         ]);
 
         // Create the role
         Role::create([
-            'title' => $request->title,
+            'name' => $request->name,
             'permissions' => json_encode($request->permissions),
         ]);
-
-        // Redirect back with success message
         return redirect()->back()->with('success', 'Role created successfully!');
     }
 
@@ -53,7 +51,7 @@ class RoleController extends Controller
     public function update(Request $request, $id)
     {
         $validateData = $request->validate([
-            'title' => 'required|string|max:255',
+            'name' => 'required|string|max:255',
             'permissions' => 'array',
             'permissions.*' => 'string',
         ]);
@@ -61,7 +59,7 @@ class RoleController extends Controller
         $role = Role::findOrFail($id);
 
         // Update role details
-        $role->title = $validateData['title'];
+        $role->name = $validateData['name'];
         $role->permissions = isset($validateData['permissions']) ? json_encode($validateData['permissions']) : json_encode([]);
 
         $role->save();

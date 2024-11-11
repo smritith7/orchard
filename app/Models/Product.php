@@ -13,11 +13,15 @@ class Product extends Model
      * @var array
      */
     protected $fillable = [
-        'name', // Add any other fields that you want to allow for mass assignment
+        'name',
         'price',
+        'unit',
+        'custom_unit',
         'description',
-        // ... other fields
+        'image',
+        'stock'
+
     ];
 
-    // ... other model code
+
 }

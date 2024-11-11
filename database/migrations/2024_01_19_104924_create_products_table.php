@@ -17,6 +17,9 @@ class CreateProductsTable extends Migration
             $table->string('image')->nullable();
             $table->text('description')->nullable();
             $table->decimal('price')->nullable();
+            $table->string('unit')->nullable();
+             $table->decimal('custom_unit', 8, 2)->nullable();
+            $table->integer('stock')->default(0)->change;
             $table->timestamps();
         });
     }

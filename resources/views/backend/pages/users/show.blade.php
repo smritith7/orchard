@@ -2,45 +2,45 @@
 
 @section('content')
     <div class="container mt-5">
-
         @if (session('success'))
             <div class="alert alert-success">
                 {{ session('success') }}
             </div>
         @endif
 
-        {{-- user-detail --}}
-
-        <div class="card shadow mb-4">
-            <div class="card-header">
-                <h2 class="m-0">User Detail</h2>
+        {{-- Header Section --}}
+        <div class="row align-items-center mb-4">
+            <div class="col-6">
+                <h3 class="mb-0" style="font-weight: 600; color: #343a40;">User Details</h3>
             </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-6 mb-2">
-                        <div class="card-title font-weight-bold" style="font-size: 1.5rem;">{{ $user->full_name }}</div>
-                        <p class="card-text"><strong>Email:</strong> {{ $user->email }}</p>
-                        <p class="card-text"><strong>Phone No:</strong> {{ $user->phone_no ?? 'N/A' }}</p>
-                        <p class="card-text"><strong>Role:</strong> {{ ucfirst($user->role) ?? 'N/A' }}</p>
-                    </div>
-                    <div class="col-md-6 text-md-right mb-3">
-                        <img src="{{ asset('path/to/user-avatar.png') }}" alt="User Avatar" class="img-fluid rounded-circle" style="width: 150px; height: 150px;">
+            <div class="col-6 d-flex justify-content-end">
+                <form action="{{ route('backend.user.index', ['id' => $user->id]) }}" method="GET" style="display: inline-block;">
+                    @csrf
+                    @method('GET')
+                    <button type="submit" class="btn btn-primary shadow mb-3">Back</button>
+                </form>
+            </div>
+        </div>
+
+        {{-- Image Section --}}
+        <div class="card shadow-lg">
+            <div class="row no-gutters">
+                <div class="col-md-6 d-flex justify-content-center align-items-center">
+                    <img src="{{ asset('assets/images/avatar.jpeg') }}" alt="User Avatar" class="img-fluid rounded-circle" style="width: 50%; height: auto; object-fit: cover;">
+                </div>
+
+                {{-- Info Section --}}
+                <div class="col-md-6">
+                    <div class="card-body d-flex flex-column justify-content-between" style="padding: 20px;">
+                        <div>
+                            <h5 class="card-title mb-2" style="font-size: 2rem; font-weight: bold;">{{ $user->full_name }}</h5>
+                            <p class="card-text"><strong>Email:</strong> {{ $user->email }}</p>
+                            <p class="card-text"><strong>Phone No:</strong> {{ $user->phone_no ?? 'N/A' }}</p>
+                            {{-- <p class="card-text"><strong>Role:</strong> {{ ucfirst($user->role) ?? 'N/A' }}</p> --}}
+                        </div>
                     </div>
                 </div>
             </div>
-
-        </div>
-        <div class=" text-end">
-            <a href="{{ route('backend.user.edit', ['id' => $user->id]) }}" class="btn btn-info shadow">Edit User</a>
-
-            <form action="{{ route('backend.user.destroy', ['id' => $user->id]) }}" method="POST" style="display: inline-block;">
-                @csrf
-                @method('DELETE')
-                <button type="submit" class="btn btn-danger shadow ms-2"
-                    onclick="return confirm('Are you sure you want to delete this user?')">Delete User</button>
-            </form>
         </div>
     </div>
-
-
 @endsection

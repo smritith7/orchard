@@ -1,55 +1,47 @@
 @extends('backend.layouts.main')
 
 @section('content')
+
     <div class="container mt-5">
+
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         @if (session('success'))
             <div class="alert alert-success">
                 {{ session('success') }}
             </div>
         @endif
 
+        <div class="row align-items-center">
+            <div class="col d-flex justify-content-between">
+                <h3 class="mb-0 font-weight-bold text-dark">Users Table</h3>
+                <button class="btn btn-primary ml-3 btn-shadow" data-toggle="modal" data-target="#registrationModal">
+                    Create User
+                </button>
+            </div>
+        </div>
+
         <div class="card shadow mt-4">
             <div class="card-body">
-                <div class="row align-items-center mb-3">
-                    <!-- Title and Create User -->
-                    <div class="col-md-6 d-flex align-items-center">
-                        <h5 class="m-0" style="font-weight: 500; font-size: 1.5rem; color: #343a40;">Users List</h5>
-                        <button class="btn btn-primary ml-3 btn-shadow" data-toggle="modal" data-target="#registrationModal">
-                            Create User
-                        </button>
-                    </div>
-
-                    <!-- Search Form -->
-                    <div class="col-md-6 d-flex justify-content-end">
-                        <form method="GET" action="{{ route('backend.user.index') }}" class="d-flex me-2">
-                            <div class="input-group">
-                                <!-- Search Input Field -->
-                                <input id="search-input" type="search" name="search"
-                                    value="{{ request()->get('search') }}" class="form-control" placeholder="Search"
-                                    style="width: 200px; border-top-right-radius: 0; border-bottom-right-radius: 0;">
-
-                                <!-- Search Button -->
-                                <button id="search-button" type="submit"
-                                    class="btn btn-outline-secondary btn-shadow search-btn"
-                                    style="border: 1px solid #ced4da; background-color: transparent; height: 38px; border-top-left-radius: 0; border-bottom-left-radius: 0;">
-                                    <i class="fas fa-search"></i>
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
 
                 <!-- Registration Modal -->
-                <div class="modal fade" id="registrationModal">
-                    <div class="modal-dialog">
+                <div class="modal fade" id="registrationModal" tabindex="-1" role="dialog"
+                    aria-labelledby="registrationModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
-                            <!-- Modal Header -->
                             <div class="modal-header justify-content-center bg-secondary text-dark">
                                 <h4 class="modal-title font-weight-bold">Register New Users</h4>
-                                <button type="button" class="close" data-dismiss="modal" style="color: white;">×</button>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                                    style="color: white;">×</button>
                             </div>
-
-                            <!-- Modal Body -->
                             <div class="modal-body">
                                 <form action="{{ route('backend.user.store') }}" method="POST" class="p-3">
                                     @csrf
@@ -73,6 +65,7 @@
                                             @enderror
                                         </div>
                                     </div>
+
                                     <div class="form-group">
                                         <label for="email">Email:</label>
                                         <input type="email" name="email" id="email"
@@ -82,21 +75,30 @@
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
                                     </div>
-                                    <div class="form-row">
-                                        <div class="form-group col-md-6">
-                                            <label for="role">Role:</label>
-                                            <select name="role" id="role"
-                                                class="form-select @error('role') is-invalid @enderror" required>
-                                                <option value="" selected>Select Role</option>
-                                                <option value="admin">Admin</option>
-                                                <option value="manager">Manager</option>
-                                                <option value="assistant">Assistant</option>
-                                            </select>
+                                    {{-- <div class="form-group">
+                                        <div class="dropdown  d-inline-block">
+                                            <button
+                                                class="btn btn-outline-secondary dropdown-toggle @error('role') is-invalid @enderror"
+                                                type="button" id="roleDropdown" data-toggle="dropdown" aria-haspopup="true"
+                                                aria-expanded="false">
+                                                {{ old('role') ? ucfirst(old('role')) : 'Select Role' }}
+                                            </button>
+                                            <div class="dropdown-menu" aria-labelledby="roleDropdown" style="border: none;">
+                                                <a class="dropdown-item" href="#"
+                                                    onclick="selectRole('admin')">Admin</a>
+                                                <a class="dropdown-item" href="#"
+                                                    onclick="selectRole('manager')">Manager</a>
+                                                <a class="dropdown-item" href="#"
+                                                    onclick="selectRole('assistant')">Assistant</a>
+                                            </div>
+                                            <input type="hidden" name="role" id="role"
+                                                value="{{ old('role') }}">
                                             @error('role')
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
                                         </div>
-                                    </div>
+
+                                    </div> --}}
                                     <div class="form-group">
                                         <label for="password">Password:</label>
                                         <input type="password" name="password" id="password"
@@ -105,7 +107,6 @@
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
                                     </div>
-
                                     <div class="form-group">
                                         <label for="password_confirmation">Confirm Password:</label>
                                         <input type="password" name="password_confirmation" id="password_confirmation"
@@ -115,15 +116,12 @@
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
                                     </div>
-
                                     <div class="text-center">
                                         <button type="submit" class="btn btn-danger btn-shadow"
                                             style="width: 150px;">Register</button>
                                     </div>
                                 </form>
-
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -136,7 +134,7 @@
                             <th>Full Name</th>
                             <th>Email</th>
                             <th>Phone No</th>
-                            <th>Role</th>
+                            {{-- <th>Role</th> --}}
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -147,7 +145,7 @@
                                 <td>{{ $user->full_name }}</td>
                                 <td>{{ $user->email }}</td>
                                 <td>{{ $user->phone_no }}</td>
-                                <td>{{ ucfirst($user->role) }}</td>
+                                {{-- <td>{{ ucfirst($user->role) }}</td> --}}
                                 <td>
                                     <a href="{{ route('backend.user.show', $user->id) }}"
                                         class="btn btn-success btn-sm btn-shadow">View</a>
@@ -178,22 +176,18 @@
         </div>
     </div>
 
-    <!-- Custom Styles for Button Shadows and Hover Effects -->
-    <style>
-        .btn-shadow {
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-            transition: box-shadow 0.2s ease;
-            /* Smooth transition */
-        }
+    <!-- Include jQuery and Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 
-        .btn-shadow:hover {
-            box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.15);
-        }
 
-        .search-btn:hover {
-            background-color: #007bff !important;
-            color: white !important;
-            border-color: #007bff !important;
+    {{-- role dropdown js --}}
+
+    <script>
+        function selectRole(role) {
+            document.getElementById('role').value = role;
+            document.getElementById('roleDropdown').innerText = role.charAt(0).toUpperCase() + role.slice(1);
+            $('.dropdown-menu').removeClass('show');
         }
-    </style>
+    </script>
 @endsection

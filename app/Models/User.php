@@ -16,6 +16,7 @@ class User extends Authenticatable
         'full_name',
         'phone_no',
         'password',
+        'image',
         'role',
     ];
 
@@ -32,4 +33,6 @@ class User extends Authenticatable
     {
         return ucfirst($value); // Capitalizes the role name
     }
+
+
 }

@@ -10,43 +10,49 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
     public function index(Request $request)
-{
-    $search = $request->get('search');
+    {
+        $search = $request->get('search');
 
-    $users = User::when($search, function ($query, $search) {
-        return $query->where('full_name', 'like', "%{$search}%")
-                     ->orWhere('email', 'like', "%{$search}%")
-                     ->orWhere('phone_no', 'like', "%{$search}%");
-    })->paginate(10);
+        $users = User::when($search, function ($query, $search) {
+            return $query->where('full_name', 'like', "%{$search}%")
+                ->orWhere('email', 'like', "%{$search}%")
+                ->orWhere('phone_no', 'like', "%{$search}%");
+        })->paginate(10);
 
-    return view('backend.pages.users.index', compact('users', 'search'));
-}
+        return view('backend.pages.users.index', compact('users', 'search'));
+    }
     public function create()
     {
         return view('backend.pages.users.create');
     }
 
+    //store users info
     public function store(Request $request)
     {
+
         $validatedData = $request->validate([
             'full_name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
             'phone_no' => 'required|string|max:20',
-            'role' => 'required|string',
+            // 'role' => 'required|string',
             'password' => 'required|string|min:8',
         ]);
 
-        User::create([
+
+        //create user
+        $user = User::create([
             'full_name' => $validatedData['full_name'],
             'email' => $validatedData['email'],
             'phone_no' => $validatedData['phone_no'],
             'password' => Hash::make($validatedData['password']),
-            'role' => $validatedData['role'],
+            // 'role' => $validatedData['role'],
         ]);
+
 
         return redirect()->route('backend.user.index')->with('success', 'User added successfully.');
     }
 
+    //show user info
     public function show($id)
     {
         $user = User::findOrFail($id);
@@ -65,8 +71,8 @@ class UserController extends Controller
             'full_name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email,' . $id,
             'phone_no' => 'required|string|max:20',
-            'role' => 'required|string',
-            'password' => 'nullable|string|min:8', // Make password optional
+            // 'role' => 'required|string',
+            'password' => 'nullable|string|min:8', // password optional
         ]);
 
         $user = User::findOrFail($id);
@@ -75,9 +81,8 @@ class UserController extends Controller
         $user->full_name = $validatedData['full_name'];
         $user->email = $validatedData['email'];
         $user->phone_no = $validatedData['phone_no'];
-        $user->role = $validatedData['role'];
+        // $user->role = $validatedData['role'];
 
-        // Handle password update if provided
         if ($request->filled('password')) {
             $user->password = Hash::make($validatedData['password']);
         }
@@ -94,6 +99,4 @@ class UserController extends Controller
         $user->delete();
         return redirect()->route('backend.user.index')->with('success', 'User deleted successfully.');
     }
-
 }
-
