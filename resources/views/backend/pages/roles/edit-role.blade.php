@@ -1,4 +1,4 @@
-@extends('backend.layouts.main')
+{{-- @extends('backend.layouts.main')
 
 @section('content')
     @if (session('success'))
@@ -18,7 +18,7 @@
                     @method('PUT')
 
                     {{-- Role Name --}}
-                    <div class="form-row">
+                   {{-- <div class="form-row">
                         <div class="col-md-6 mb-3">
                             <label for="name">Name:</label>
                             <input type="text" name="name" id="name"
@@ -76,13 +76,13 @@
                 </form>
             </div>
         </div>
-    </div>
+    </div>--}}
 
     <!-- Select All Checklist JS Function -->
-    <script>
+    {{--<script>
         document.getElementById('selectAll').addEventListener('change', function() {
             const checkboxes = document.querySelectorAll('.permission-checkbox');
             checkboxes.forEach(checkbox => checkbox.checked = this.checked);
         });
     </script>
-@endsection
+@endsection --}}

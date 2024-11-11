@@ -19,11 +19,14 @@ class DashboardController extends Controller
 
         //total users count
         $totalUsers = User::count();
+        $totalProducts = Product::count();
 
         //all users
-        $users = User::all(); // Fetch all users to display if needed
+        $users = User::all();// Fetch all users to display if needed
+
+        $products = Product::all();// Fetch all products to display if needed
 
 
-        return view('backend.pages.dashboard', compact('products', 'totalUsers', 'users'));
+        return view('backend.pages.dashboard', compact('products', 'totalUsers', 'users','totalProducts', 'products',));
     }
 }

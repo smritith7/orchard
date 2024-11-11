@@ -19,14 +19,18 @@
 
                     {{-- Product Name --}}
                     <div class="form-group">
-                        <label for="name">Name:</label>
+                        <label for="name">Name:
+                            <span class="text-danger">*</span>
+                        </label>
                         <input type="text" name="name" id="name" class="form-control" value="{{ old('name', $product->name) }}" required>
                     </div>
 
                     {{-- Price and Unit Fields --}}
                     <div class="form-row">
-                        <div class="form-group col-md-6 mb-3">
-                            <label for="price">Price:</label>
+                        <div class="form-group col-md-4 mb-3">
+                            <label for="price">Price and unit:
+                                <span class="text-danger">*</span>
+                            </label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Nrs.</span>
@@ -34,7 +38,7 @@
                                 <input type="number" name="price" id="price" class="form-control" value="{{ old('price', $product->price) }}" required>
                             </div>
                         </div>
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-4">
                             <label for="unit">Unit:</label>
                             <div class="input-group">
                                 <input type="number" name="custom_unit" id="custom_unit" class="form-control w-75" value="{{ old('custom_unit', $product->custom_unit) }}" step="0.5" min="0.5" max="10">
@@ -45,6 +49,18 @@
                                         <option value="lb" {{ old('unit', $product->unit) == 'lb' ? 'selected' : '' }}>lb</option>
                                     </select>
                                 </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-4">
+                            <label for="stock">Stock:
+                                <span class="text-danger">*</span>
+                            </label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                </div>
+                                <input type="number" name="stock" id="stock" class="form-control"
+                                    value="{{ old('stock', $product->stock) }}" required>
                             </div>
                         </div>
                     </div>

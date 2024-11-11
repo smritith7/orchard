@@ -16,10 +16,11 @@ class CreateProductsTable extends Migration
             $table->string('name')->nullable();
             $table->string('image')->nullable();
             $table->text('description')->nullable();
-            $table->decimal('price')->nullable();
+            $table->decimal('price', 8, 2)->nullable();
             $table->string('unit')->nullable();
-             $table->decimal('custom_unit', 8, 2)->nullable();
-            $table->integer('stock')->default(0)->change;
+            $table->decimal('custom_unit', 8, 2)->nullable();
+            $table->integer('stock')->default(0);
+            $table->string('product_code')->default('PROD-0000')->unique();
             $table->timestamps();
         });
     }

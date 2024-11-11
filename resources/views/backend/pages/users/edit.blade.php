@@ -19,10 +19,10 @@
                     {{-- Edit user Form --}}
                     <div class="form-row">
                         <div class="col-md-6 mb-3">
-                            <label for="full_name">Full Name:</label>
-                            <input type="text" name="full_name" id="full_name"
+                            <label for="full_name">Customer Name:</label>
+                            <input type="text" name="customer_name" id="customer_name"
                                 class="form-control @error('full_name') is-invalid @enderror"
-                                value="{{ old('full_name', $user->full_name) }}" required>
+                                value="{{ old('customer_name', $sales->customer_name) }}" required>
                             @error('full_name')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror

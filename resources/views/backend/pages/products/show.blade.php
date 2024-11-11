@@ -30,30 +30,19 @@
                 </div>
                 {{-- Info Section --}}
                 <div class="col-md-6">
-                    <div class="card-body d-flex flex-column justify-content-between" style="padding: 20px;">
+                    <div class="card-body d-flex flex-column justify-content-between" style="padding: 35px;">
                         <div>
                             <h5 class="card-title mb-2" style="font-size: 2rem; font-weight: bold;">{{ $product->name }}
                             </h5>
                             <p class="card-text">{{ $product->description }}</p>
-                            <p class="card-text" style="color: grey;">{{ $product->stock }} <span>Stock available </span></p>
                             <p class="card-text">
-                                <strong>Price:</strong> Rs. {{ number_format($product->price, 0) }}
-                                @if ($product->unit == 'kg')
-                                <span>per kg</span>
-                            @endif
-
+                                <strong>Price:</strong> Rs. {{ number_format($product->price, 1) }}
+                                @if ($product->unit == 'kg' && $product->custom_unit == 1)
+                                    <span>(per kg)</span>
+                                @endif
                             </p>
-
-                            <div class="form-group d-flex align-items-center">
-                                <input type="number" name="custom_unit" id="custom_unit" class="form-control w-50 mx-2"
-                                    value="{{ old('custom_unit') ?? 1 }}" step="0.5" min="0.5" max="10">
-                            </div>
-                        </div>
-
-                        <!-- Button Section -->
-                        <div class="mt-3 mb-4 d-flex">
-                            <button type="button" class="btn btn-success w-25 mr-2">Buy Now</button>
-                            <button type="button" class="btn btn-primary w-25">Add to Cart</button>
+                            <p class="card-text" style="color: rgb(105, 105, 105);">{{ $product->stock }} <span>Stock
+                                    available </span></p>
                         </div>
                     </div>
                 </div>

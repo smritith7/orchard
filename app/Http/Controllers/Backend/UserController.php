@@ -12,47 +12,88 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $search = $request->get('search');
-
         $users = User::when($search, function ($query, $search) {
             return $query->where('full_name', 'like', "%{$search}%")
                 ->orWhere('email', 'like', "%{$search}%")
                 ->orWhere('phone_no', 'like', "%{$search}%");
-        })->paginate(10);
+        })
+        ->orderBy('full_name', 'Asc')
+        ->paginate(10);
 
         return view('backend.pages.users.index', compact('users', 'search'));
     }
+
+    // Role-based User Listing
+    public function admin(Request $request)
+    {
+        $search = $request->get('search');
+        $users = User::where('role', 'admin')
+            ->when($search, function ($query, $search) {
+                return $query->where('full_name', 'like', "%{$search}%")
+                    ->orWhere('email', 'like', "%{$search}%")
+                    ->orWhere('phone_no', 'like', "%{$search}%");
+            })
+            ->orderBy('full_name', 'asc')
+            ->paginate(10);
+
+        return view('backend.pages.users.index', compact('users', 'search'));
+    }
+
+    public function employee(Request $request)
+    {
+        $search = $request->get('search');
+        $users = User::where('role', 'employee')
+            ->when($search, function ($query, $search) {
+                return $query->where('full_name', 'like', "%{$search}%")
+                    ->orWhere('email', 'like', "%{$search}%")
+                    ->orWhere('phone_no', 'like', "%{$search}%");
+            })
+            ->orderBy('full_name', 'asc')
+            ->paginate(10);
+
+        return view('backend.pages.users.employee', compact('users', 'search'));
+    }
+
+    public function customer(Request $request)
+    {
+        $search = $request->get('search');
+        $users = User::where('role', 'customer')
+            ->when($search, function ($query, $search) {
+                return $query->where('full_name', 'like', "%{$search}%")
+                    ->orWhere('email', 'like', "%{$search}%")
+                    ->orWhere('phone_no', 'like', "%{$search}%");
+            })
+            ->orderBy('full_name', 'asc')
+            ->paginate(10);
+
+        return view('backend.pages.users.customer', compact('users', 'search'));
+    }
+
+    // Other User Methods (store, create, edit, update, destroy)
     public function create()
     {
         return view('backend.pages.users.create');
     }
 
-    //store users info
     public function store(Request $request)
     {
-
         $validatedData = $request->validate([
             'full_name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
             'phone_no' => 'required|string|max:20',
-            // 'role' => 'required|string',
-            'password' => 'required|string|min:8',
+            'password' => 'required|string|min:8|confirmed',
         ]);
 
-
-        //create user
         $user = User::create([
             'full_name' => $validatedData['full_name'],
             'email' => $validatedData['email'],
             'phone_no' => $validatedData['phone_no'],
             'password' => Hash::make($validatedData['password']),
-            // 'role' => $validatedData['role'],
         ]);
-
 
         return redirect()->route('backend.user.index')->with('success', 'User added successfully.');
     }
 
-    //show user info
     public function show($id)
     {
         $user = User::findOrFail($id);
@@ -71,17 +112,13 @@ class UserController extends Controller
             'full_name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email,' . $id,
             'phone_no' => 'required|string|max:20',
-            // 'role' => 'required|string',
-            'password' => 'nullable|string|min:8', // password optional
+            'password' => 'nullable|string|min:8',
         ]);
 
         $user = User::findOrFail($id);
-
-        // Update user details
         $user->full_name = $validatedData['full_name'];
         $user->email = $validatedData['email'];
         $user->phone_no = $validatedData['phone_no'];
-        // $user->role = $validatedData['role'];
 
         if ($request->filled('password')) {
             $user->password = Hash::make($validatedData['password']);
@@ -92,11 +129,11 @@ class UserController extends Controller
         return redirect()->route('backend.user.index')->with('success', 'User updated successfully.');
     }
 
-
     public function destroy($id)
     {
         $user = User::findOrFail($id);
         $user->delete();
+
         return redirect()->route('backend.user.index')->with('success', 'User deleted successfully.');
     }
 }

@@ -1,4 +1,4 @@
-@extends('backend.layouts.main')
+{{-- @extends('backend.layouts.main')
 
 @section('content')
     <div class="container mt-3">
@@ -10,7 +10,7 @@
         @endif
 
         {{-- Role Title --}}
-        <div class="container mt-5">
+        {{--<div class="container mt-5">
             <div class="row align-items-center">
                 <div class="col-6">
                     <h3 class="mb-3" style="font-weight: 600; color: #343a40; text-align: left;">
@@ -50,4 +50,4 @@
             </div>
         </div>
     </div>
-@endsection
+@endsection --}}

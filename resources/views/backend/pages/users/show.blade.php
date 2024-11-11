@@ -31,11 +31,12 @@
 
                 {{-- Info Section --}}
                 <div class="col-md-6">
-                    <div class="card-body d-flex flex-column justify-content-between" style="padding: 20px;">
+                    <div class="card-body d-flex flex-column justify-content-between" style="padding: 35px;">
                         <div>
                             <h5 class="card-title mb-2" style="font-size: 2rem; font-weight: bold;">{{ $user->full_name }}</h5>
                             <p class="card-text"><strong>Email:</strong> {{ $user->email }}</p>
                             <p class="card-text"><strong>Phone No:</strong> {{ $user->phone_no ?? 'N/A' }}</p>
+                            <p class="card-text"><strong>Email:</strong>{{ $user->email}}</p>
                             {{-- <p class="card-text"><strong>Role:</strong> {{ ucfirst($user->role) ?? 'N/A' }}</p> --}}
                         </div>
                     </div>

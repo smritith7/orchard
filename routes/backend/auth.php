@@ -5,17 +5,12 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\Auth\AuthController;
 
 
-
-Route::get('/', function () {
+Route::get('/login', function () {
     if (Auth::check()) {
         return redirect()->route('backend.dashboard');
     }
     return view('backend.auth.pages.login');
 })->name('login');
-
-
-
-
 
 Route::controller(AuthController::class)
 ->group(function(){

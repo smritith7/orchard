@@ -10,6 +10,10 @@ class RoleController extends Controller
 {
     public function index(Request $request)
     {
+
+        // if(!has_persiion()){
+        //     abort(403);
+        // }
         $search = $request->get('search');
 
         $roles = Role::when($search, function ($query, $search) {

@@ -1,4 +1,4 @@
-@extends('backend.layouts.main')
+ @extends('backend.layouts.main')
 
 @section('content')
     <div class="container mt-5">
@@ -8,7 +8,7 @@
             </div>
         @endif
 
-        <div class="container mt-5">
+         <div class="container mt-5">
             <div class="container mt-3">
                 <div class="row align-items-center">
                     <div class="col d-flex justify-content-between">
@@ -172,6 +172,12 @@
                         @endforeach
                     </tbody>
                 </table>
+                @if ($roles->isEmpty())
+                    <!-- No Data Message Below the Table -->
+                    <div class="alert alert-warning mt-3" role="alert">
+                        No roles data available.
+                    </div>
+                @endif
 
                 {{--Pagination--}}
                 <div class="mt-3 d-flex justify-content-center">
@@ -182,7 +188,7 @@
     </div>
 
     <!-- Custom Styles for Button Shadows and Hover Effects -->
-    {{-- <style>
+     <style>
         .btn-shadow {
             box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
             transition: box-shadow 0.2s ease;
@@ -197,10 +203,10 @@
             color: white !important;
             border-color: #007bff !important;
         }
-    </style> --}}
+    </style>
 
     <!-- Script for Select All Checkbox -->
-    <script>
+     <script>
         document.getElementById('selectAll').addEventListener('change', function() {
             const checkboxes = document.querySelectorAll('.permission-checkbox');
             checkboxes.forEach(checkbox => checkbox.checked = this.checked);

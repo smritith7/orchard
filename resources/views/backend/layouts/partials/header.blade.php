@@ -1,4 +1,4 @@
-<nav class="main-header navbar navbar-expand navbar-light fixed-top" id="navbar">
+<nav class="main-header navbar navbar-expand navbar-white fixed-top" id="navbar">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
         <li class="nav-item">
@@ -29,9 +29,9 @@
             </a>
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                 <div class="dropdown-divider"></div>
-                <a href="{{ route('profile') }}" class="dropdown-item"><i class="fas fa-users mr-2"></i> Profile</a>
+                <a href="" class="dropdown-item"></a>
                 <div class="dropdown-divider"></div>
-                <a href="{{ route('logout') }}" class="dropdown-item"><i class="fa fa-sign-out"></i> Logout <span class="float-right text-muted text-sm">3 mins</span></a>
+                <a href="" class="dropdown-item"></a>
             </div>
         </li>
         <li class="nav-item dropdown" style="margin-top: -15px;">
@@ -39,8 +39,8 @@
                 <img src="{{ asset('backend/uploads/avatar/avatar.jpg') }}" class="img-circle" alt="User Image" style="width: 40px; height: 40px; box-shadow: none;">
             </a>
             <div class="dropdown-menu dropdown-menu-right">
-                <a class="dropdown-item" href="">Setting</a>
-                <a class="dropdown-item" href="{{ route('logout') }}"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a>
+                <a class="dropdown-item" href=""><i class="fa-solid fa-gear"></i>  Setting</a>
+                <a class="dropdown-item" href="{{ route('logout') }}"><i class="fa-solid fa-arrow-right-from-bracket"></i>  Logout</a>
                 <div class="dropdown-divider"></div>
             </div>
         </li>

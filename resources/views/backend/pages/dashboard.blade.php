@@ -9,7 +9,8 @@
         <div class="row">
             <!-- Total Visits Card -->
             <div class="col-md-3">
-                <div class="card text-white mb-4" style="background: linear-gradient(135deg, #ff8c00, #ff4500); border-radius: 15px; box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);">
+                <div class="card text-white mb-4 hover-scale-shadow"
+                    style="background: linear-gradient(135deg,#ff4500, #ff8c00); border-radius: 15px; box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);">
                     <div class="card-body">
                         <h5 class="card-title">
                             <i class="fa-regular fa-eye"></i> Total Visits
@@ -20,7 +21,8 @@
             </div>
             <!-- Total Orders Card -->
             <div class="col-md-3">
-                <div class="card text-white mb-4" style="background: linear-gradient(135deg, #1e90ff, #00bfff); border-radius: 15px; box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);">
+                <div class="card text-white mb-4 hover-scale-shadow"
+                    style="background: linear-gradient(135deg, #1e90ff, #00bfff); border-radius: 15px; box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);">
                     <div class="card-body">
                         <h5 class="card-title">
                             <i class="fas fa-shopping-cart"></i> Total Orders
@@ -31,28 +33,34 @@
             </div>
             <!-- Total Users Card -->
             <div class="col-md-3">
-                <div class="card text-white mb-4" style="background: linear-gradient(135deg, #ff8c00, #ff4400); border-radius: 15px; box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);">
-                    <div class="card-body">
-                        <h5 class="card-title">
-                            <i class="fa-regular fa-eye"></i> Total Users
-                        </h5>
-                        <p class="card-text display-4">{{ $totalUsers }}</p> <!-- Display total number of users -->
+                <a href="{{ route('backend.user.index') }}" style="text-decoration: none;">
+                    <div class="card text-white mb-4 hover-scale-shadow"
+                        style="background: linear-gradient(135deg, #f31a87, #f078b8); border-radius: 15px; box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <i class="fa-regular fa-eye"></i> Total Users
+                            </h5>
+                            <p class="card-text display-4">{{ $totalUsers }}</p>
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
-
-            <!-- Total Revenue Card -->
+            <!-- Total Products Card -->
             <div class="col-md-3">
-                <div class="card text-white mb-4" style="background: linear-gradient(135deg, #ff69b4, #ff1493); border-radius: 15px; box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);">
-                    <div class="card-body">
-                        <h5 class="card-title">
-                            <i class="fas fa-dollar-sign"></i> Total Revenue
-                        </h5>
-                        <p class="card-text display-4">Rs.5000</p>
+                <a href="{{ route('backend.products.index') }}" style="text-decoration: none;">
+                    <div class="card text-white mb-4 hover-scale-shadow"
+                        style="background: linear-gradient(135deg,#0066ff, #5689f7 ); border-radius: 15px; box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <i class='fas fa-shopping-basket'></i> Total products
+                            </h5>
+                            <p class="card-text display-4">{{ $totalProducts }}</p>
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
         </div>
+
 
         <div class="row mt-4">
             <!-- Line Chart -->
@@ -94,7 +102,7 @@
                                     <th>S.N</th>
                                     <th>Name</th>
                                     <th>Unit</th>
-                                    <th>Price</th>
+                                    <th>Price (Nrs)</th>
                                     <th>Stock</th>
                                 </tr>
                             </thead>
@@ -104,7 +112,7 @@
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $product->name }}</td>
                                         <td>{{ $product->custom_unit }} {{ $product->unit }}</td>
-                                        <td>Nrs. {{ number_format($product->price, 2) }}</td>
+                                        <td>{{ number_format($product->price, 2) }}</td>
                                         <td>{{ $product->stock > 0 ? $product->stock : 'Out of Stock' }}</td>
                                     </tr>
                                 @empty
@@ -119,7 +127,7 @@
             </div>
 
             <!-- User Status Table -->
-            {{-- <div class="col-md-5">
+            {{-- <div class="col-md-6">
                 <div class="card shadow mb-4">
                     <div class="card-header bg-white">
                         <h4>User Status</h4>
@@ -130,108 +138,115 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Name</th>
-                                    <th>Status</th>
+                                    {{-- <th>Role</th> --}}
+            {{-- <th>Status</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>User A</td>
-                                    <td><span class="badge bg-success">Active</span></td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>User B</td>
-                                    <td><span class="badge bg-danger">Inactive</span></td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>User C</td>
-                                    <td><span class="badge bg-success">Active</span></td>
-                                </tr>
+                                @forelse ($users as $user)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $user->full_name }}</td>
+                                        <td>{{ $user->status ?? 'Deactive'}}
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td colspan="3" class="text-center">No user found</td>
+                                    </tr>
+                                @endforelse
                             </tbody>
+
                         </table>
                     </div>
                 </div>
-            </div> --}}
+            </div>
         </div>
-    </div>
+    </div> --}}
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const lineChartData = {
-                labels: ['January', 'February', 'March', 'April', 'May', 'June'],
-                datasets: [{
-                    label: 'Sales',
-                    data: [12, 19, 3, 5, 2, 3],
-                    fill: false,
-                    borderColor: 'rgba(75, 192, 192, 1)',
-                    tension: 0.4
-                }]
-            };
+            <script>
+                document.addEventListener("DOMContentLoaded", function() {
+                    const lineChartData = {
+                        labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+                        datasets: [{
+                            label: 'Sales',
+                            data: [12, 19, 3, 5, 2, 3],
+                            fill: false,
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            tension: 0.4
+                        }]
+                    };
 
-            const barChartData = {
-                labels: ['Jul', 'Aug', 'Sept', 'Oct', 'Nov'],
-                datasets: [{
-                    label: 'Orders',
-                    data: [5, 10, 15, 8, 20],
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)',
+                    const barChartData = {
+                        labels: ['Jul', 'Aug', 'Sept', 'Oct', 'Nov'],
+                        datasets: [{
+                            label: 'Orders',
+                            data: [5, 10, 15, 8, 20],
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
 
-                    ],
-                    borderColor: [
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)',
+                            ],
+                            borderColor: [
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
 
-                    ],
-                    borderWidth: 1
-                }]
-            };
+                            ],
+                            borderWidth: 1
+                        }]
+                    };
 
-            const lineChartConfig = {
-                type: 'line',
-                data: lineChartData,
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true
+                    const lineChartConfig = {
+                        type: 'line',
+                        data: lineChartData,
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            },
+                            plugins: {
+                                legend: {
+                                    display: false
+                                }
+                            }
                         }
-                    },
-                    plugins: {
-                        legend: {
-                            display: false
+                    };
+
+                    const barChartConfig = {
+                        type: 'bar',
+                        data: barChartData,
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            },
+                            plugins: {
+                                legend: {
+                                    display: false
+                                }
+                            }
                         }
-                    }
+                    };
+
+                    const lineChart = new Chart(document.getElementById('lineChart'), lineChartConfig);
+                    const barChart = new Chart(document.getElementById('barChart'), barChartConfig);
+                });
+            </script>
+            <style>
+                .hover-scale-shadow {
+                    transition: transform 0.3s, box-shadow 0.3s;
                 }
-            };
 
-            const barChartConfig = {
-                type: 'bar',
-                data: barChartData,
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    },
-                    plugins: {
-                        legend: {
-                            display: false
-                        }
-                    }
+                .hover-scale-shadow:hover {
+                    transform: scale(1.05);
+                    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
                 }
-            };
-
-            const lineChart = new Chart(document.getElementById('lineChart'), lineChartConfig);
-            const barChart = new Chart(document.getElementById('barChart'), barChartConfig);
-        });
-    </script>
-
-@endsection
+            </style>
+        @endsection

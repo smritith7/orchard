@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Frontend\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,5 +23,9 @@ require_once __DIR__.'/backend/auth.php';
 
 // Backend
 require_once __DIR__.'/backend/web.php';
+
+
+Route::get('/',[HomeController::class,'home'])->name('home');
+
 
 
